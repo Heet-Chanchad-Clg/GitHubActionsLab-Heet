@@ -1,0 +1,39 @@
+name: Dependent Jobs Workflow
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        name: Build Job
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print build message
+              run: echo "Building application..."
+
+            - name: Simulate build process
+              run: sleep 5
+
+    test:
+        name: Test Job
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print test message
+              run: echo "Running tests..."
+
+            - name: Simulate test execution
+              run: sleep 5
+
+    deploy:
+        name: Deploy Job
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print deploy message
+              run: echo "Deploying application..."
+
+            - name: Simulate deployment
+              run: sleep 5
